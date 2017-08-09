@@ -115,34 +115,22 @@ void display()//for printing the final Linklist
     printf("\n\n");
 }
 //----------------------------------------------------------
-void sort()
+void sort()//PS:sort function may throw error after 2nd sort
 {
-   int i, j, k, t_Key, t_Data ;
-   struct node *current;
-   struct node *temp;
-   int size = length();
-   k = size ;
-	
-   for ( i = 0 ; i < size - 1 ; i++, k-- ) {
-      current = head ;
-      temp = head->link ;
-		
-      for ( j = 1 ; j < k ; j++ ) {
-		
-         if ( current->data > temp->data ) {
-            t_Data = current->data ;
-            current->data = temp->data;
-            temp->data = t_Data ;
-
-            t_Key = current->key;
-            current->key = temp->key;
-            temp->key = t_Key;
-         }
-			
-         current = current->link;
-         temp = temp->link;                        
-      }
-   }   
+   struct node* i,*j;
+   //struct node* temp;
+   int var=0;
+   for(i=root;i!=NULL;i=i->link)
+   {
+    for(j=i->link;j!=NULL;j=j->link)
+    {
+     if(i->data > j->data)
+     var = i->data;
+     i->data=j->data;
+     j->data= var;
+    }
+   }
+   printf("\n the numbers are sorted:");
 }
 
 //----------------------------------------------------------
@@ -222,6 +210,7 @@ int main()
      case 3: printf("Sorted List:\n");
              sort();
              display();
+             break;
      case 4: printf("Linked list: \n\n");
              display();
              break;
