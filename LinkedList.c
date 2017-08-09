@@ -8,6 +8,7 @@ struct node
 };
 
 struct node* root=NULL;
+int len;
 //root=(struct node*)malloc(sizeof(struct node));
 
 //--------------------------------------------------------
@@ -41,8 +42,8 @@ int lenght() // counting the number of elements in the list
  temp=root;
   while(temp!=NULL)
   {
-   count++;
    temp = temp->link;
+   count++;
   }
  return count;
 }
@@ -63,17 +64,51 @@ void addatbegin()
      temp->link= root;//right side connection first for replacing the address
      root=temp;//left side connection second for entering the data..if you do this first you loose the whole data in linked list
    }
- 
 }
 //----------------------------------------------------------
 void display()//for printing the final Linklist
 {
     struct node *temp;
     temp=root;
+    if (temp == NULL)
+    {
+     printf("List is empty \n \n");
+    }
     while(temp!=NULL)
     {
-    printf("  %d  ",temp->data);
+    printf("%d-->",temp->data);
     temp=temp->link;
+    }
+    printf("\n\n");
+}
+//----------------------------------------------------------
+void addatPosition()
+{
+ struct node* temp,*p;
+ int loc,len,locat,i=1;
+ printf("Enter location:");
+ scanf("%d",&locat);
+ temp=(struct node*)malloc(sizeof(struct node));
+     printf("enter node data:");
+     scanf("%d", &temp->data);
+     temp->link=NULL;
+ loc=locat-1;
+ len=lenght();
+  if(loc>len)
+    {
+     printf("Invalid location \n");
+     printf("currently list is having %d nodes",len);
+    }
+  else
+    {
+     p=root;
+     while(i<loc)
+     {
+      p=p->link;
+      i++;
+     }
+     temp->link = p->link;//right connection to connect the link to next element
+     p->link=temp;//left connecetion to connect the data to pervious element
     }
 }
 //----------------------------------------------------------
@@ -95,6 +130,7 @@ int main()
       printf("Where would you like to enter the element in the Linked List: \n");
       printf("1.At the Begining \n");
       printf("2.At the End \n");
+      printf("3.At the specific Position \n");
       scanf("%d",&c);
       switch(c)
       {
@@ -104,16 +140,17 @@ int main()
       case 2: append();
               display();
               break;
-    /**  case 3: append()
+      case 3: addatPosition();
               display();
               break;  
-    **/
       }
     }
    else
     {
       printf("Thankyou for using Linked list \n");
-      printf("Display the Linked list: \n");
+      printf("Linked list: \n");
       display();
     }
 }
+
+ 
