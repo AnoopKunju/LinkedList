@@ -115,6 +115,37 @@ void display()//for printing the final Linklist
     printf("\n\n");
 }
 //----------------------------------------------------------
+void sort()
+{
+   int i, j, k, t_Key, t_Data ;
+   struct node *current;
+   struct node *temp;
+   int size = length();
+   k = size ;
+	
+   for ( i = 0 ; i < size - 1 ; i++, k-- ) {
+      current = head ;
+      temp = head->link ;
+		
+      for ( j = 1 ; j < k ; j++ ) {
+		
+         if ( current->data > temp->data ) {
+            t_Data = current->data ;
+            current->data = temp->data;
+            temp->data = t_Data ;
+
+            t_Key = current->key;
+            current->key = temp->key;
+            temp->key = t_Key;
+         }
+			
+         current = current->link;
+         temp = temp->link;                        
+      }
+   }   
+}
+
+//----------------------------------------------------------
 void addatPosition()
 {
  struct node* temp,*p;
@@ -129,7 +160,7 @@ void addatPosition()
  len=length();
   if(loc>len)
     {
-     printf("Invalid location \n");
+     printf("\nInvalid location ");
     }
   else
     {
@@ -155,53 +186,53 @@ int main()
      append();  //entering the elements at the end of list
      display();
    }
- printf("\n-------Operations on Linked List-------\n\n"); 
  while(1)
- {
-  printf("1.INSERT more elements \n");
-  printf("2.DELETE elements \n");
-  printf("3.SORT elements \n");
-  printf("4.DISPLAY the Linked List \n");
-  printf("5.EXIT\n");
-  scanf("%d",&a);
-   switch(a)
-    {
-    case 1: printf("Where would you like to enter the element in the Linked List: \n");
-            printf("1.At the Begining \n");
-            printf("2.At the End \n");
-            printf("3.At the specific Position \n");
-            scanf("%d",&c);
-            switch(c)
+ {   
+   printf("\n-------Operations on Linked List-------\n\n"); 
+   printf("1.INSERT more elements \n");
+   printf("2.DELETE elements \n");
+   printf("3.SORT elements \n");
+   printf("4.DISPLAY the Linked List \n");
+   printf("5.EXIT\n");
+   scanf("%d",&a);
+    switch(a)
+     {
+     case 1: printf("Where would you like to enter the element in the Linked List: \n");
+             printf("1.At the Begining \n");
+             printf("2.At the End \n");
+             printf("3.At the specific Position \n");
+             scanf("%d",&c);
+             switch(c)
+              {
+                case 1: addatbegin();
+                        display();
+                        break;
+                case 2: append();
+                        display();
+                        break;
+                case 3: addatPosition();
+                        display();
+                        break;
+              }
+             break;
+     case 2: printf("Delected List:\n");
+             delete();
+             display();
+             break;
+     case 3: printf("Sorted List:\n");
+             sort();
+             display();
+     case 4: printf("Linked list: \n\n");
+             display();
+             break;
+     case 5: printf("Thank you for using LINKED LIST\n");
+             printf("Confirm you wanna EXIT?\n yes(1)/no(0)");
+             scanf("%d",&d);
+             if(d==1)
              {
-               case 1: addatbegin();
-                       display();
-                       break;
-               case 2: append();
-                       display();
-                       break;
-               case 3: addatPosition();
-                       display();
-                       break;
+              exit(0);
              }
-            break;
-    case 2: printf("Delected List:\n");
-            delete();
-            break;
-   // case 3:
-    case 4: printf("Linked list: \n\n");
-            display();
-            break;
-    case 5: printf("Thank you for using LINKED LIST\n");
-            printf("Confirm you wanna EXIT?\n yes(1)/no(0)");
-            scanf("%d",&d);
-            if(d==1)
-            {
-             exit(0);
-            }
-            break;
-    }
+             break;
+     }
  }
-  
 }
-
- 
